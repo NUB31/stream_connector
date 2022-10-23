@@ -1,17 +1,17 @@
 {
-  "name": "server",
+  "name": "connector",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/server.ts",
   "scripts": {
-    "clear": "rm -r build | rm -r dist | rm -r modules | rm settings.json",
+    "clear": "rm -r build | rm -r dist | rm settings.json",
     "setup": "ts-node src/install.ts",
     "dev": "nodemon --watch src/**/*.ts -L src/server.ts",
     "build": "rm -r build | rm -r dist | tsc && pkg build/server.js --target node16-win --out-dir dist && pkg build/install.js  --target node16-win --out-dir dist && rm -r build",
     "start": "rm -r build | tsc && node build/server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "NUB31",
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",

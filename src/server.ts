@@ -12,7 +12,6 @@ function main() {
 
     // Start music
     socket.on("music/play", async (content, cb) => {
-      console.log("play");
       const musicSocket = await getSocketByRole("music");
       if (musicSocket) {
         musicSocket.emit("play", content, (res: any) => {
@@ -24,7 +23,6 @@ function main() {
     });
 
     socket.on("music/add", async (content, cb) => {
-      console.log("add");
       const musicSocket = await getSocketByRole("music");
       if (musicSocket) {
         musicSocket.emit("add", content, (res: any) => {
@@ -36,7 +34,6 @@ function main() {
     });
 
     socket.on("music/pause", async (content, cb) => {
-      console.log("pause");
       const musicSocket = await getSocketByRole("music");
       if (musicSocket) {
         musicSocket.emit("pause", content, (res: any) => {
@@ -48,7 +45,6 @@ function main() {
     });
 
     socket.on("music/resume", async (content, cb) => {
-      console.log("resume");
       const musicSocket = await getSocketByRole("music");
       if (musicSocket) {
         musicSocket.emit("resume", content, (res: any) => {
@@ -60,7 +56,6 @@ function main() {
     });
 
     socket.on("music/skip", async (content, cb) => {
-      console.log("skip");
       const musicSocket = await getSocketByRole("music");
       if (musicSocket) {
         musicSocket.emit("skip", content, (res: any) => {
@@ -71,6 +66,19 @@ function main() {
       }
     });
     // End music
+
+    // Start chat
+    socket.on("chat/message", async (content, cb) => {
+      const chatSocket = await getSocketByRole("chat");
+      if (chatSocket) {
+        chatSocket.emit("message", content, (res: any) => {
+          if (cb && res) cb(res);
+        });
+      } else {
+        if (cb) cb({ status: false, message: "Chat service not connected" });
+      }
+    });
+    // End chat
 
     socket.on("storeClientInfo", function (data) {
       clients.push({ role: data.role, socketId: socket.id });
